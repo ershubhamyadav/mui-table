@@ -13,6 +13,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import ContactUs from "./Pages/ContactUs";
 // import EditRecipe from "./Pages/EditRecipe";
 import TermsAndConditions from "./Pages/TermsAndConditions";
+import ClientList from "./Pages/ClientList";
 
 function App() {
   return (
@@ -22,9 +23,8 @@ function App() {
         <div style={{ marginTop: "80px" }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="recipes/:categoryTitle" element={<Recipes />} />
-            <Route path="recipe-details/:userId" element={<RecipesDetails />} />
-            <Route path="edit-recipe/:recipeId" element={<EditRecipe />} /> */}
+
+            <Route path="/pro_admin/client_list" element={<ClientList />} />
             <Route path="/get-quote" element={<GetQuote />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

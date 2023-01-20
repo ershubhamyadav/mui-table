@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CreatableSelect from "react-select/creatable";
+import CreatableSelect from "react-select";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ContentState, convertToRaw } from "draft-js";
@@ -10,7 +10,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 // import { CKEditor } from "@ckeditor/ckeditor5-react";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import { Container, Row, Col, Form, Card } from "react-bootstrap";
+import { Container, Row, Col, Form, Card, InputGroup } from "react-bootstrap";
 import { addClient, fetchSweetList } from "../firestoreService";
 // import Select from "react-select";
 // import TextEditor from "../Comoponents/TextEditor";
@@ -23,7 +23,15 @@ export default function GetQuote() {
   const [contentState] = useState(raw);
   const [sweetList, setSweetList] = useState([]);
   useEffect(() => {
-    fetchSweetList().then((res) => setSweetList(res));
+    fetchSweetList().then((res) => {
+      let data = res.map((item) => ({
+        ...item,
+        label: item.price
+          ? item.label + " ₹" + item.price + " per KG"
+          : item.label
+      }));
+      setSweetList(data);
+    });
   }, []);
   // const [getDescription] = useState();
   const [errors, setErrors] = useState([]);
@@ -61,22 +69,12 @@ export default function GetQuote() {
       selectedSweet: list
     }));
   };
-  console.log(payload.selectedSweet);
+
   const submit = async () => {
-    // const data = new FormData();
-    // data.append("images", payload.images);
-    // data.append("name", payload.name);
-    // data.append("takenTime", payload.takenTime);
-    // data.append("description", payload.description);
-    // data.append("school_name", payload.school_name);
-    // data.append("email", payload.email);
-    // data.append("category_id", payload.category_id);
-    // data.append("tags", payload.tags);
-    // data.append("ingredients", payload.ingredients);
     try {
       const res = await addClient(payload);
-      console.log("Res", res);
       notify("Recipe added successfully");
+      setPayload({});
     } catch (error) {
       console.log("Error", error);
     }
@@ -150,7 +148,7 @@ export default function GetQuote() {
               type="email"
               className="form-control"
               required
-              placeholder="email*"
+              placeholder="Email*"
               name="email"
               onChange={onChange}
             />
@@ -234,21 +232,31 @@ export default function GetQuote() {
                   <label className="text-white mb-2">
                     Select quantity ( KG )
                   </label>
-                  <input
-                    type="numeber"
-                    className="form-control"
-                    required
-                    name="quantity"
-                    placeholder="Quantity*"
-                    value={item.quantity}
-                    maxlength="3"
-                    onChange={(e) => {
-                      e.target.value
-                        ? parseFloat(e.target.value) >= 0 &&
-                          onChangeSweet(i, { quantity: e.target.value })
-                        : onChangeSweet(i, { quantity: e.target.value });
-                    }}
-                  />
+                  <InputGroup>
+                    <Form.Control
+                      type="numeber"
+                      className="form-control"
+                      required
+                      name="quantity"
+                      placeholder="Quantity*"
+                      value={item.quantity}
+                      maxlength="3"
+                      onChange={(e) => {
+                        e.target.value
+                          ? parseFloat(e.target.value) >= 0 &&
+                            onChangeSweet(i, { quantity: e.target.value })
+                          : onChangeSweet(i, { quantity: e.target.value });
+                      }}
+                    />
+                    {item.price && item.quantity && (
+                      <>
+                        <InputGroup.Text>
+                          {parseFloat(item.price) * parseFloat(item.quantity)}
+                        </InputGroup.Text>
+                        <InputGroup.Text>₹</InputGroup.Text>
+                      </>
+                    )}
+                  </InputGroup>
                   <p>
                     *please use point (.) to gram quality should greater than
                     500 g{" "}

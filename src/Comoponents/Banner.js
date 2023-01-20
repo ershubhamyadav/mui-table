@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 
 import Slider from "react-slick";
-import { fetchSweetList } from "../firestoreService";
+import { addSweetItem, fetchSweetList } from "../firestoreService";
+import { sweetItemList } from "../stringConstant";
 // import { sweetList } from "../stringConstant";
 
 export default function Banner() {
@@ -19,18 +20,7 @@ export default function Banner() {
   useEffect(() => {
     fetchSweetList().then((res) => setSweetList(res));
   }, []);
-  // const addSweet = () => {
-  //   addSweetItem({
-  //     value: 1,
-  //     label: "Sweet Boondi",
-  //     description: "",
-  //     offerTitle: "Republic Day Offer",
-  //     offer: "145.00",
-  //     price: "175.00",
-  //     img: "assets/images/boondi.jpeg"
-  //   });
-  //   fetchSweetList().then((res) => setSweetList(res));
-  // };
+
   return (
     <div>
       <Slider className="mainSlider" {...settings}>
@@ -42,15 +32,19 @@ export default function Banner() {
                   <h3 className="fw-bold text-white">
                     {i.label !== undefined ? i.label : "No Name"}
                   </h3>
+                  {i.offerTitle && (
+                    <p className="multiLine_ellipsis text-white">
+                      {i.offerTitle}
+                    </p>
+                  )}
                   {i.offer ? (
                     <p className="multiLine_ellipsis text-white">
-                      {i.offerTitle} <br />
                       <b>₹{i.offer}</b>
                       <del>M.R.P. ₹{i.price}</del>
                     </p>
                   ) : (
-                    <p>
-                      <b>M.R.P. ₹{i.price}</b>
+                    <p className="multiLine_ellipsis text-white">
+                      {i.price && <b>M.R.P. ₹{i.price}</b>}
                     </p>
                   )}
                   <p className="multiLine_ellipsis text-white">
@@ -69,7 +63,6 @@ export default function Banner() {
           );
         })}
       </Slider>
-      {/* <button onClick={() => addSweet()}>clik</button> */}
     </div>
   );
 }

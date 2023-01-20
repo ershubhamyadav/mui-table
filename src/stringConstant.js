@@ -88,5 +88,11 @@ export const sweetList = [
     label: "Kaju katli.jpeg",
     description: "",
     img: "assets/images/kaju_katli.jpeg"
+  },
+  {
+    value: 16,
+    label: "Besan Laddu",
+    description: "",
+    img: "assets/mages/pad.jpeg"
   }
 ];

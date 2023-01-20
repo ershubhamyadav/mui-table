@@ -10,11 +10,15 @@ import { db } from "./firebase-config";
 
 export const deleteClient = async (client_id) => {
   const emd = doc(db, "client", client_id);
-  const res = await deleteDoc(emd);
-  console.log("sdasd", res);
+  await deleteDoc(emd);
+  try {
+    return { status: true };
+  } catch (error) {
+    return { ...error, status: false };
+  }
 };
 
-export const fetchClietn = async () => {
+export const fetchClient = async () => {
   const clientCollection = collection(db, "client");
   try {
     const res = await getDocs(clientCollection);
