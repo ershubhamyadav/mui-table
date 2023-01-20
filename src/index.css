@@ -11,24 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-#root {
-  display: flex;
-  justify-content: center;
-}
-
-svg:hover {
-  background-color: #8295ef2b;
-  cursor: pointer;
-  color: #898686 !important;
-  border-radius: 100%;
-}
-
-button:hover {
-  background-color: #e7ebf0 !important;
-}
-input input:hover input:focus {
-  /* backgroundColor: "#e7ebf0", borderColor: "none", border: 0 }} */
-  background-color: #e7ebf0 !important;
-  border-color: #e7ebf0 !important;
-}

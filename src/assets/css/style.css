@@ -1,0 +1,309 @@
+:root {
+  /* --primary-bg: #F93F23; */
+  --primary-bg: #f99b23;
+  --50: #ffffff;
+  --800: #393939;
+  --850: #0c0c0c;
+  --900: #000000;
+  --btn-font-size: 18px;
+  --btn-padding: 10px 15px;
+}
+
+body {
+  background: var(--900) !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.navbar > .container {
+  max-width: 1300px !important;
+}
+
+.bg-dark {
+  background: var(--800) !important;
+}
+
+.bg-theme {
+  background: var(--primary-bg);
+}
+
+.navbar-brand {
+  font-family: 'Inspiration', cursive;
+  font-size: 3rem !important;
+  font-weight: bold;
+  line-height: 50px;
+  padding-bottom: 0px;
+}
+
+.navbar .form-control {
+  border-radius: 0px;
+}
+
+.secondNav {
+  transition: all .3s;
+}
+
+.secondNav.fixed-top {
+  padding: 0px;
+}
+
+.mainSlider .slick-slide img {
+  height: 300px !important;
+  width: 95%;
+  object-fit: cover;
+}
+
+.navbar .nav-link {
+  font-size: 14px;
+}
+.searchContainer {
+  max-height: 300px;
+  overflow: auto;
+  position: absolute;
+  z-index: 10;
+  width: calc(100% - 2.15rem);
+  left: 1.1rem;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, .3);
+}
+.dropdown-toggle::after {
+  display: none !important;
+}
+.searchSection .dropdown-menu {
+  top: 35px !important;
+}
+.searchSection .dropdown-menu,
+.searchSection button {
+  width: 100%;
+}
+.searchSection.dropdown {
+  width: 100%;
+}
+.sctionHeading {
+  margin-bottom: 30px;
+  margin-top: 10px;
+  text-transform: capitalize;
+}
+
+.sctionHeading > h2 {
+  font-size: 35px;
+  font-weight: 700;
+  /* font-family: 'Inspiration', cursive; */
+}
+
+section {
+  padding: 70px 0px;
+}
+
+.fancyCard {
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+  /* aspect-ratio: 1/1; */
+}
+
+.fancyCard > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.fancyCard > .cardInfo {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  padding: 20px;
+  background: var(--900);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, .9) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, .9) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, .9) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr="#000000",
+      endColorstr="#000000",
+      GradientType=1
+    );
+}
+
+.fancyCard > .cardInfo h5 {
+  font-weight: 700;
+}
+
+.thaliBg {
+  background: var(--850);
+  /* background: url('https://images.livemint.com/img/2022/03/15/1140x641/thali_pushpesh_pant_1647330283948_1647330336536.jpg');
+    background-size: cover;
+    background-position: right center; */
+}
+
+.submitRecipe {
+  background: url('../images/logo2.png');
+  background-size: cover;
+  background-position: right center;
+}
+
+a.themeBtn,
+.themeBtn {
+  background: var(--primary-bg);
+  font-weight: 700;
+  font-size: 18px;
+  display: inline-block;
+  padding: 15px 40px;
+  border-radius: 50px;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, .3);
+  transition: all .3s;
+  color: var(--900);
+  text-decoration: none;
+  opacity: .8;
+}
+
+.themeBtn:hover {
+  box-shadow: 0px 10px 40px 0px rgba(0, 0, 0, .9);
+  opacity: 1;
+  color: var(--900);
+}
+
+.contentWrapper {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.detailspage .contentWrapper + img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.slideContent {
+  width: 700px;
+  left: 350px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+}
+
+.slideContent h3 {
+  font-family: 'Inspiration', cursive;
+  font-size: 50px;
+}
+
+footer .navbar-brand {
+  color: var(--primary-bg) !important;
+  font-size: 60px !important;
+}
+footer {
+  background-color: #138808 !important;
+}
+nav {
+  position: fixed !important;
+  z-index: 10 !important;
+  width: 100% !important;
+  top: 0 !important;
+}
+.innerPage {
+  padding: 30px 0px 50px;
+}
+
+.detailspage > .position-relative {
+  height: 500px;
+}
+
+.themeBadge.bg-primary {
+  padding: 10px 20px !important;
+  display: inline-block !important;
+  margin: 5px;
+  color: var(--900);
+  background-color: var(--primary-bg) !important;
+}
+
+.ingredients {
+  line-height: 30px;
+  color: var(--50);
+  margin-bottom: 50px;
+}
+
+.innerPage .form-control {
+  color: var(--50) !important;
+  background-color: var(--850) !important;
+  border: 1px solid #303030 !important;
+}
+
+.creatableSelect [class*="-control"] {
+  color: var(--50) !important;
+  background-color: var(--850) !important;
+  border: 1px solid #303030 !important;
+}
+
+.creatableSelect [class*="-control"] svg {
+  /* color: #000000; */
+}
+
+.creatableSelect [class*="-multiValue"] {
+  background: var(--800);
+}
+
+.creatableSelect input {
+  color: var(--50);
+}
+
+.creatableSelect [class*="-multiValue"] > div[class*="css-"] {
+  color: var(--50) !important;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.multiLine_ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 768px) {
+  textarea#myTa {
+    height: calc(100vh - 100px) !important;
+  }
+  .slideContent {
+    width: calc(100%);
+    /* margin-left: 15px; */
+    left: 0;
+  }
+
+  .detailspage .contentWrapper {
+    position: static !important;
+  }
+
+  .detailspage > .position-relative {
+    height: auto;
+  }
+}
