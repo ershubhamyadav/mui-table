@@ -50,3 +50,27 @@ export const addContactQuery = async (payload) => {
     return { ...error, status: false };
   }
 };
+///////////////////////////////////////////////////////////////////////////////
+
+export const fetchSweetList = async () => {
+  const clientCollection = collection(db, "sweetList");
+  const res = await getDocs(clientCollection);
+  try {
+    return res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  } catch (error) {
+    return { ...error, status: false };
+  }
+};
+
+export const addSweetItem = async (payload) => {
+  const contactCollection = collection(db, "sweetList");
+
+  const emd = await addDoc(contactCollection, payload);
+  try {
+    console.log("emd", emd);
+    return { status: true };
+  } catch (error) {
+    //   console.log("sdasd", res);
+    return { ...error, status: false };
+  }
+};

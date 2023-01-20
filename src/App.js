@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Includes/Header";
 import Home from "./Pages/Home";
 // import Recipes from "./Pages/Recipes";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import RecipesDetails from "./Pages/RecipesDetails";
 import Footer from "./Includes/Footer";
 import GetQuote from "./Pages/GetQuote";
@@ -25,14 +25,17 @@ function App() {
             {/* <Route path="recipes/:categoryTitle" element={<Recipes />} />
             <Route path="recipe-details/:userId" element={<RecipesDetails />} />
             <Route path="edit-recipe/:recipeId" element={<EditRecipe />} /> */}
-            <Route path="get-quote" element={<GetQuote />} />
-            <Route path="about-us" element={<AboutUs />} />
-            <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/get-quote" element={<GetQuote />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route
-              path="terms_and_conditions"
+              path="/terms_and_conditions"
               element={<TermsAndConditions />}
             />
-            <Route path="contact-us" element={<ContactUs />} />
+            {/* <Route path="/" element={!user ? <Navigate to="/contact-us" replace /> : <Home />} /> */}
+
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="*" render={() => <Navigate to="/" replace />} />
           </Routes>
         </div>
         <Footer />

@@ -45,7 +45,7 @@ export default function ContactUs() {
               }
             />
           </Col>
-          <Col md={5} lg={4} className="px-2  mb-3">
+          <Col md={5} lg={8} className="px-2  mb-3">
             <label className="text-white mb-2">Email *</label>
             <input
               type="email"

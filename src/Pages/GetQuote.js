@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CreatableSelect from "react-select/creatable";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,20 +11,20 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { Container, Row, Col, Form, Card } from "react-bootstrap";
-import { addClient } from "../firestoreService";
-import { sweetList } from "../stringConstant";
+import { addClient, fetchSweetList } from "../firestoreService";
 // import Select from "react-select";
 // import TextEditor from "../Comoponents/TextEditor";
 // import Toastify from "../Comoponents/Toastify";
 
-const categoryArr = [];
 let newArr = [];
 export default function GetQuote() {
   let _contentState = ContentState.createFromText("");
   const raw = convertToRaw(_contentState);
   const [contentState] = useState(raw);
-
-  const [category] = useState(categoryArr);
+  const [sweetList, setSweetList] = useState([]);
+  useEffect(() => {
+    fetchSweetList().then((res) => setSweetList(res));
+  }, []);
   // const [getDescription] = useState();
   const [errors, setErrors] = useState([]);
   const [payload, setPayload] = useState({
@@ -33,7 +33,6 @@ export default function GetQuote() {
     category_id: [],
     takenTime: "",
     images: "",
-    ingredients: [],
     selectedSweet: []
   });
   const notify = (notification) => toast(notification);
@@ -56,13 +55,13 @@ export default function GetQuote() {
 
   const onChangeSweet = (ind, obj) => {
     const list = payload.selectedSweet;
-    list.splice(ind, 1, { ...list.i, ...obj });
+    list.splice(ind, 1, { ...list[ind], ...obj });
     setPayload((state) => ({
       ...state,
       selectedSweet: list
     }));
   };
-
+  console.log(payload.selectedSweet);
   const submit = async () => {
     // const data = new FormData();
     // data.append("images", payload.images);
