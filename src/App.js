@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./assets/css/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./Includes/Header";
@@ -14,8 +14,15 @@ import ContactUs from "./Pages/ContactUs";
 // import EditRecipe from "./Pages/EditRecipe";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import ClientList from "./Pages/ClientList";
+import { appLogID } from "./stringConstant";
+import CarttList from "./Pages/CarttList";
 
 function App() {
+  useEffect(() => {
+    if (localStorage.getItem(appLogID) != null) {
+      localStorage.setItem(appLogID, JSON.stringify(Date.parse(new Date())));
+    }
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,7 +32,8 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/pro_admin/client_list" element={<ClientList />} />
-            <Route path="/get-quote" element={<GetQuote />} />
+            <Route path="/get_quote" element={<GetQuote />} />
+            <Route path="/cart_list" element={<CarttList />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route

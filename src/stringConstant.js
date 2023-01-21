@@ -96,3 +96,5 @@ export const sweetList = [
     img: "assets/mages/pad.jpeg"
   }
 ];
+
+export const appLogID = "app-log-id";

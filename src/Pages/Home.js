@@ -2,33 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Banner from "../Comoponents/Banner";
+import CardGrid from "../Comoponents/CardGrid";
 import DynamicMeta from "../Comoponents/DynamicMeta";
 import ItemSlider from "../Comoponents/ItemSlider";
+import { fetchSweetList } from "../firestoreService";
 export default function Home() {
   const [item, setItem] = useState([]);
   const [category, setCategory] = useState([]);
 
   // const params = useParams();
   // console.log(params.userId, "===============");
+  const [sweetList, setSweetList] = useState([]);
   useEffect(() => {
-    const url = "/api/v1/recipes";
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url, {
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET"
-          }
-        });
-        const json = await response.json();
-        setItem(json.data);
-      } catch (error) {
-        //console.log("error", error);
-      }
-    };
-    fetchData();
+    fetchSweetList().then((res) => setSweetList(res));
   }, []);
 
   useEffect(() => {
@@ -55,7 +41,12 @@ export default function Home() {
         url={"https://www.vandemishthan.co.in"}
         tags={" food,food and drink,food industry"}
       />
-      <Banner />
+      <Banner sweetList={sweetList} />
+      <section>
+        <Container>
+          <CardGrid sweetList={sweetList} />
+        </Container>
+      </section>
       <section className="submitRecipe">
         <Container>
           <div className="sctionHeading text-white">
@@ -84,7 +75,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="mt-5">
-                  <Link to="/get-quote" className="themeBtn">
+                  <Link to="/get_quote" className="themeBtn">
                     Get Quote
                   </Link>
                 </div>
@@ -107,34 +98,30 @@ export default function Home() {
             </p>
           </div>
           <Row className="px-2">
-            {item &&
-              item
-                .sort((a, b) => b.id - a.id)
-                .slice(0, 6)
-                .map((i, index) => {
-                  // console.log(i);
-                  return (
-                    <Col
-                      md={4}
-                      xs={6}
-                      className="px-2 mb-3 position-relative"
-                      key={index}
-                    >
-                      <Link
-                        to={`/recipe-details/${i.id}`}
-                        className="stretched-link"
-                      ></Link>
-                      <div className="fancyCard">
-                        <img src={i.recipe_images?.image} alt="sweet" />
-                        <div className="cardInfo">
-                          <h5>{i.name}</h5>
-                          <em className="small">{i.category}</em>
-                          {/* <p className="text-ellipsis">{i.description}</p> */}
-                        </div>
+            {sweetList &&
+              sweetList.slice(0, 6).map((i, index) => {
+                return (
+                  <Col
+                    md={4}
+                    xs={6}
+                    className="px-2 mb-3 position-relative"
+                    key={index}
+                  >
+                    <Link
+                      to={`/recipe-details/${i.id}`}
+                      className="stretched-link"
+                    ></Link>
+                    <div className="fancyCard">
+                      <img src={i?.img} alt="sweet" />
+                      <div className="cardInfo">
+                        <h5>{i.label}</h5>
+                        <em className="small">{i.category}</em>
+                        {/* <p className="text-ellipsis">{i.description}</p> */}
                       </div>
-                    </Col>
-                  );
-                })}
+                    </div>
+                  </Col>
+                );
+              })}
           </Row>
         </Container>
       </section>

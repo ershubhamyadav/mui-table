@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-
+import React from "react";
 import Slider from "react-slick";
-import { addSweetItem, fetchSweetList } from "../firestoreService";
-import { sweetItemList } from "../stringConstant";
-// import { sweetList } from "../stringConstant";
 
-export default function Banner() {
+export default function Banner({ sweetList }) {
   const settings = {
     dots: false,
     arrows: false,
@@ -16,10 +11,6 @@ export default function Banner() {
     slidesToShow: 1,
     slidesToScroll: 1
   };
-  const [sweetList, setSweetList] = useState([]);
-  useEffect(() => {
-    fetchSweetList().then((res) => setSweetList(res));
-  }, []);
 
   return (
     <div>
