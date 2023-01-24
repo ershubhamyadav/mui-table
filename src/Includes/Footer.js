@@ -30,11 +30,11 @@ export default function Footer() {
                 Vande Mishthan
               </Link>
               <p className="text-white my-3">
-                What's your favorite dish to cook?
+                What's your favorite sweet's?
                 <br />
-                Need a little inspiration? You've come to the right place!
-                Explore new flavors, ingredients and recipes that are just
-                waiting to be discovered. Register now and get started.⁣⁣
+                Order Now ......
+                <br /> You've come to the right place! Explore new flavors of
+                sweets. Order Now and get at your Home.⁣⁣
               </p>
             </Col>
             <Col lg={2} className="offset-lg-1">

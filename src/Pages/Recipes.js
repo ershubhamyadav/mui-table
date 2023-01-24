@@ -25,8 +25,9 @@ export default function Recipes() {
   return (
     <>
       <DynamicMeta
-        description={`What's your favorite dish to cook?
-    Need a little inspiration? You've come to the right place! Explore new flavors, ingredients and recipes that are just waiting to be discovered. Register now and get started.`}
+        description={`What's your favorite sweet's?
+    Order Now...... \n You've come to the right place! Explore new flavors of sweets. 
+Order Now and get at your Home.`}
         title={"Vande Mishthan"}
         image={"/storage/app/public/recipees/6377c2075c313.jpeg"}
         url={"https://www.vandemishthan.co.in/recipes/" + params}

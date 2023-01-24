@@ -59,7 +59,11 @@ function Header() {
       <Navbar variant="dark" className="bg-theme" expand="lg">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            Vande Mishthan
+            <img
+              src="assets/images/vandeMishthan.png"
+              alt="vandeMishthan"
+              height="70px"
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
