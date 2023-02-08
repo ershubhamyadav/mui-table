@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import Login from "../Pages/Auth/Login";
 
 function Header() {
   const [, setOffset] = useState(0);
@@ -152,6 +153,14 @@ function Header() {
               >
                 Contact Us
               </Nav.Link>
+              <DropdownButton
+                id="login"
+                title="Login"
+                className="login-dropdown"
+                drop="start"
+              >
+                <Login />
+              </DropdownButton>
             </Nav>
           </Navbar.Collapse>
         </Container>

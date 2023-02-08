@@ -3,7 +3,7 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 // import Select from "react-select";
-import DynamicMeta from "../Comoponents/DynamicMeta";
+import DynamicMeta from "../../Comoponents/DynamicMeta";
 
 export default function TermsAndConditions() {
   // const options = [];

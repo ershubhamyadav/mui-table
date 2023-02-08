@@ -95,8 +95,7 @@ export default function GetQuote() {
     <Container className="innerPage">
       <div className="sctionHeading text-white">
         <h2>Get Order Quote</h2>
-
-        <ToastContainer />
+        CartList
       </div>
       {errors.length !== 0 ? (
         <Card className="bg-dark text-white mb-3">

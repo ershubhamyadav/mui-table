@@ -17,17 +17,17 @@ import {
   deleteClient,
   fetchCartList,
   fetchClient
-} from "../firestoreService";
+} from "../../firestoreService";
 
-export default function CarttList() {
+export function CartList() {
   let _contentState = ContentState.createFromText("");
   const raw = convertToRaw(_contentState);
   const [deletedTrue, setDeletedTrue] = useState(true);
   const [errors, setErrors] = useState([]);
-  const [carttList, setCarttList] = useState([]);
+  const [cartList, setCartList] = useState([]);
 
   useEffect(() => {
-    fetchCartList().then((res) => setCarttList(res));
+    fetchCartList().then((res) => setCartList(res));
   }, [deletedTrue]);
 
   const handleDelete = (id) => {
@@ -35,17 +35,16 @@ export default function CarttList() {
   };
 
   const handleActiveDelete = (item, ind) => {
-    let list = [...carttList];
+    let list = [...cartList];
     list.splice(ind, 1, { ...item, toggleDelete: !item?.toggleDelete });
-    setCarttList(list);
+    setCartList(list);
   };
 
   return (
     <Container className="innerPage">
       <div className="sctionHeading text-white">
         <h2>Cart List</h2>
-
-        <ToastContainer />
+        CartList
       </div>
       {errors.length !== 0 ? (
         <Card className="bg-dark text-white mb-3">
@@ -90,7 +89,7 @@ export default function CarttList() {
           </tr>
         </thead>
         <tbody>
-          {carttList.map((item, key) => {
+          {cartList.map((item, key) => {
             console.log({ item });
             return (
               <tr key={item.id}>

@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
-import { addCart } from "../firestoreService";
+import { addCart } from "../firestoreService/";
 import { appLogID } from "../stringConstant";
 
 function CardGrid({ sweetList }) {

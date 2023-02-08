@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Container, Row, Col, Form } from "react-bootstrap";
-import { addContactQuery } from "../firestoreService";
+import { addContactQuery } from "../firestoreService/queryService";
 
 export default function ContactUs() {
   const [formValue, setFormValue] = useState({});

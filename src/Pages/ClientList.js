@@ -39,8 +39,7 @@ export default function ClientList() {
     <Container className="innerPage">
       <div className="sctionHeading text-white">
         <h2>Client Quote List</h2>
-
-        <ToastContainer />
+        CartList
       </div>
       {errors.length !== 0 ? (
         <Card className="bg-dark text-white mb-3">

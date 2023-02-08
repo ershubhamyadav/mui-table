@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Banner from "../Comoponents/Banner";
-import CardGrid from "../Comoponents/CardGrid";
-import DynamicMeta from "../Comoponents/DynamicMeta";
-import ItemSlider from "../Comoponents/ItemSlider";
-import { fetchSweetList } from "../firestoreService";
+import Banner from "../../Comoponents/Banner";
+import CardGrid from "../../Comoponents/CardGrid";
+import DynamicMeta from "../../Comoponents/DynamicMeta";
+import ItemSlider from "../../Comoponents/ItemSlider";
+import { fetchSweetList } from "../../firestoreService";
 export default function Home() {
   const [item, setItem] = useState([]);
   const [category, setCategory] = useState([]);
