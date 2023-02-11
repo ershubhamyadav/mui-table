@@ -30,8 +30,8 @@ function CardGrid({ sweetList }) {
               <Card.Body className="p-0">
                 <hr className="mt-0" />
                 <div className="text-white px-2 m-0">
-                  {item.offerTitle && (
-                    <p className="multiLine_ellipsis ">{item.offerTitle}</p>
+                  {item.offer_title && (
+                    <p className="multiLine_ellipsis ">{item.offer_title}</p>
                   )}
                   {item.offer ? (
                     <p className="multiLine_ellipsis m-0">

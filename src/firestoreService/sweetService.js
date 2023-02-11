@@ -29,6 +29,26 @@ export const addSweetItem = async (payload) => {
     return { ...error, status: false };
   }
 };
+
+export const deleteSweet = async (_id) => {
+  const emd = doc(db, "sweetList", _id);
+  await deleteDoc(emd);
+  try {
+    return { status: true };
+  } catch (error) {
+    return { ...error, status: false };
+  }
+};
+
+export const updateSweet = async (_id, payload) => {
+  const emd = doc(db, "sweetList", _id);
+  await updateDoc(emd, payload);
+  try {
+    return { status: true };
+  } catch (error) {
+    return { ...error, status: false };
+  }
+};
 const sweetPro = ["name", "price", "image", "stock"];
 const offerPro = [
   "title",

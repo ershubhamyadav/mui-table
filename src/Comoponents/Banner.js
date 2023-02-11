@@ -23,9 +23,9 @@ export default function Banner({ sweetList }) {
                   <h3 className="fw-bold text-white">
                     {i.label !== undefined ? i.label : "No Name"}
                   </h3>
-                  {i.offerTitle && (
+                  {i.offer_title && (
                     <p className="multiLine_ellipsis text-white">
-                      {i.offerTitle}
+                      {i.offer_title}
                     </p>
                   )}
                   {i.offer ? (

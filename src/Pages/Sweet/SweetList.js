@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ContentState, convertToRaw } from "draft-js";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { toast } from "react-toastify";
 import {
   Container,
   Row,
@@ -13,32 +10,45 @@ import {
   Form
 } from "react-bootstrap";
 import {
-  deleteCart,
-  deleteClient,
-  fetchCartList,
-  fetchClient
+  deleteSweet,
+  fetchSweetList,
+  updateSweet
 } from "../../firestoreService";
 import { sweetRow } from "../../Constant";
-import { BsTrash } from "../../Icon";
+import { BsTrash, BsPencil } from "../../Icon";
+import { useNavigate } from "react-router-dom";
+import { ConfirmModal } from "../../Comoponents/ConfirmModal";
+
 export function SweetList() {
-  let _contentState = ContentState.createFromText("");
-  const raw = convertToRaw(_contentState);
+  const navigate = useNavigate();
   const [deletedTrue, setDeletedTrue] = useState(true);
   const [errors, setErrors] = useState([]);
-  const [cartList, setCartList] = useState([]);
-
+  const [datalist, setDatalist] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [showEditModal, setShowEditModal] = useState({});
   useEffect(() => {
-    fetchCartList().then((res) => setCartList(res));
+    fetchSweetList().then((res) => setDatalist(res));
   }, [deletedTrue]);
 
-  const handleDelete = (id) => {
-    deleteCart(id).then((res) => setDeletedTrue(!deletedTrue));
+  const handleDelete = () => {
+    deleteSweet(showConfirm).then((res) => {
+      setDeletedTrue(!deletedTrue);
+      toast.success("deleted successfully");
+      setShowConfirm(false);
+    });
   };
 
-  const handleActiveDelete = (item, ind) => {
-    let list = [...cartList];
-    list.splice(ind, 1, { ...item, toggleDelete: !item?.toggleDelete });
-    setCartList(list);
+  const handleUpdate = () => {
+    console.log("ASdas", showEditModal);
+    updateSweet(showEditModal.id, showEditModal).then((res) => {
+      setDeletedTrue(!deletedTrue);
+      toast.success("update successfully");
+      setShowEditModal(false);
+    });
+  };
+
+  const editTableData = (data, title) => {
+    setShowEditModal({ ...data, title });
   };
 
   return (
@@ -48,7 +58,7 @@ export function SweetList() {
           <h2>Sweet List</h2>
           <Button
             variant="success"
-            //   onClick={() => handleDelete(item.id)}
+            onClick={() => navigate("/add_sweet")}
             className="mx-2"
           >
             Add New
@@ -95,26 +105,46 @@ export function SweetList() {
           </tr>
         </thead>
         <tbody>
-          {cartList.map((item, key) => {
-            console.log({ item });
+          {datalist.map((item, key) => {
             return (
               <tr key={item.id}>
                 <td>{key + 1}</td>
                 <td>
-                  <img src={item.img} alt="sweet" width="50px" height="50px" />
+                  <img
+                    src={item.img ? item.img : item.image}
+                    alt="sweet"
+                    width="50px"
+                    height="50px"
+                  />
                 </td>
-                <td>{item.label}</td>
-                <td>₹{item.offer}</td>
-                <td>{item.quantity ? item.quantity : 1}</td>
-                <td>{1 + "%"}</td>
-                <td>{item.quantity ? item.quantity : 1}</td>
-                <td>
-                  ₹
-                  {parseFloat(item.offer) * (item.quantity ? item.quantity : 1)}
+                <td onDoubleClick={() => editTableData(item, "sweet")}>
+                  {item.sweet ? item.sweet : item.label}
+                </td>
+                <td onDoubleClick={() => editTableData(item, "price")}>
+                  {item.price} ₹
+                </td>
+                <td onDoubleClick={() => editTableData(item, "stock")}>
+                  {item.stock ? item.stock + " KG" : 1}
+                </td>
+                <td onDoubleClick={() => editTableData(item, "offer_title")}>
+                  {item.offer_title ? item.offer_title : "-"}
+                </td>
+                <td onDoubleClick={() => editTableData(item, "offer")}>
+                  {item?.offer ? item?.offer + " %" : "-"}
+                </td>
+                <td
+                  onDoubleClick={() => editTableData(item, "offer_expiration")}
+                >
+                  {item?.offer_expiration ? item?.offer_expiration : "-"}
                 </td>
                 <td>
+                  <BsPencil
+                    onClick={() => navigate("/edit_sweet", { state: item })}
+                    className="mx-2"
+                    color="yellow"
+                  />
                   <BsTrash
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => setShowConfirm(item.id)}
                     className="mx-2"
                     color="red"
                   />
@@ -124,6 +154,37 @@ export function SweetList() {
           })}
         </tbody>
       </Table>
+      <ConfirmModal
+        isShow={showConfirm}
+        handleClose={() => setShowConfirm(false)}
+        handleSubmit={() => handleDelete()}
+      />
+
+      <ConfirmModal
+        title={showEditModal.title + " Edit confirmation"}
+        isShow={Boolean(showEditModal.id)}
+        handleClose={() => setShowEditModal(false)}
+        handleSubmit={() => handleUpdate()}
+        children={
+          <>
+            {console.log("Asa", isNaN(showEditModal[showEditModal.title]))}
+            <Form.Control
+              type={
+                isNaN(showEditModal[showEditModal.title]) === true
+                  ? "text"
+                  : "number"
+              }
+              value={showEditModal[showEditModal.title]}
+              onChange={(e) =>
+                setShowEditModal((state) => ({
+                  ...state,
+                  [showEditModal.title]: e.target.value
+                }))
+              }
+            />
+          </>
+        }
+      />
     </Container>
   );
 }

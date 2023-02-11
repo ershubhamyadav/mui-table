@@ -14,10 +14,12 @@ import ContactUs from "./Pages/ContactUs";
 import TermsAndConditions from "./Pages/Dashboard/TermsAndConditions";
 import ClientList from "./Pages/ClientList";
 import { appLogID } from "./stringConstant";
-import { CartList, SweetList, Register } from "./Pages";
+import { CartList, SweetList, Register, AddSweet } from "./Pages";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import ContentWrapper from "./HOC/ContentWrapper";
+import AdminContentWrapper from "./HOC/AdminContentWrapper";
+import { EditSweet } from "./Pages/Sweet/EditSweet";
 
 function App() {
   useEffect(() => {
@@ -52,6 +54,8 @@ function App() {
             element={ContentWrapper(ClientList)}
           />
           <Route path="/sweet_list" element={ContentWrapper(SweetList)} />
+          <Route path="/add_sweet" element={AdminContentWrapper(AddSweet)} />
+          <Route path="/edit_sweet" element={AdminContentWrapper(EditSweet)} />
           <Route path="*" render={() => <Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
