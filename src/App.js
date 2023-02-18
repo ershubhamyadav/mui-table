@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./assets/css/style.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./Includes/Header";
 import Home from "./Pages/Dashboard/Home";
 // import Recipes from "./Pages/Recipes";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -20,6 +19,8 @@ import "./App.css";
 import ContentWrapper from "./HOC/ContentWrapper";
 import AdminContentWrapper from "./HOC/AdminContentWrapper";
 import { EditSweet } from "./Pages/Sweet/EditSweet";
+import RouteScrollToTop from "./HOC/RouteScrollToTop";
+import { PrivateRoute } from "./HOC/PrivateRoute";
 
 function App() {
   useEffect(() => {
@@ -27,14 +28,25 @@ function App() {
       localStorage.setItem(appLogID, JSON.stringify(Date.parse(new Date())));
     }
   }, []);
+
+  const RoutRow = (
+    <Route path="/cart_list" element={ContentWrapper(CartList)} />
+  );
+
   return (
     <div className="App">
       <BrowserRouter>
+        <RouteScrollToTop />
         <Routes>
           <Route path="/" element={ContentWrapper(Home)} />
 
-          <Route path="/get_quote" element={ContentWrapper(GetQuote)} />
-          <Route path="/cart_list" element={ContentWrapper(CartList)} />
+          {console.log(
+            <PrivateRoute
+              path="/get_quote"
+              element={ContentWrapper(GetQuote)}
+            />
+          )}
+          {console.log(<RoutRow />)}
           <Route path="/about-us" element={ContentWrapper(AboutUs)} />
           <Route
             path="/privacy-policy"

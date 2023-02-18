@@ -167,7 +167,6 @@ export function SweetList() {
         handleSubmit={() => handleUpdate()}
         children={
           <>
-            {console.log("Asa", isNaN(showEditModal[showEditModal.title]))}
             <Form.Control
               type={
                 isNaN(showEditModal[showEditModal.title]) === true

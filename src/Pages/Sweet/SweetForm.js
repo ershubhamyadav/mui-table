@@ -8,19 +8,35 @@ import {
   Row,
   Col
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import CardGrid from "../../Comoponents/CardGrid";
+import { ConfirmModal } from "../../Comoponents/ConfirmModal";
 import { addSweetItem } from "../../firestoreService";
 
 export function SweetForm(props) {
   const { submitEvent, values = {} } = props;
+  const Navigate = useNavigate();
   const [validated, setValidated] = useState(false);
   const [formValue, setFormValue] = useState(values);
+  const [showConfirm, setShowConfirm] = useState(false);
   console.log("formValue", formValue);
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
     if (form.checkValidity() !== false) {
-      submitEvent(formValue);
+      const postData = { ...formValue };
+      if (formValue?.offer) {
+        let net_offer = parseFloat(
+          (formValue?.price * formValue?.offer) / 100
+        ).toFixed(2);
+        let sell_offer = parseFloat(formValue?.price - net_offer);
+        postData["net_offer"] = net_offer;
+        postData["sell_price"] = sell_offer;
+      }
+      console.log({ postData });
+      setFormValue(postData);
+      setShowConfirm(true);
     }
     setValidated(true);
   };
@@ -137,6 +153,7 @@ export function SweetForm(props) {
                   name="offer"
                   value={formValue?.offer}
                   onChange={(e) =>
+                    e.target.value < 60 &&
                     setFormValue((state) => ({
                       ...state,
                       [e.target.name]: e.target.value
@@ -176,7 +193,7 @@ export function SweetForm(props) {
                     name="image"
                     // value={formValue?.image}
                     onChange={(e) => onChangeImage(e)}
-                    required
+                    // required
                   />
                   <Form.Control.Feedback type="invalid">
                     Please enter stock.
@@ -184,10 +201,52 @@ export function SweetForm(props) {
                 </InputGroup>
               </Form.Group>
             </Row>
-            <Button type="submit">Submit form</Button>
+            <div className="d-flex justify-content-between">
+              <div md="6">
+                <Button type="submit">Submit form</Button>
+              </div>
+              <div md="6">
+                <Button type="button" onClick={() => Navigate(-1)}>
+                  Back
+                </Button>
+              </div>
+            </div>
           </Form>
         </Card.Body>
       </Card>
+      {showConfirm && (
+        <ConfirmModal
+          isShow={showConfirm}
+          handleClose={() => setShowConfirm(false)}
+          handleSubmit={() => submitEvent(formValue)}
+          children={
+            <Card.Body className="p-0">
+              <Card.Img variant="top" src={formValue.image} height={"200px"} />
+              <hr className="mt-0" />
+              <div className=" px-2 m-0">
+                <p className="multiLine_ellipsis ">
+                  Name : {formValue.sweet_name}
+                </p>
+                <p className="multiLine_ellipsis ">
+                  Price : {formValue.price} ₹
+                </p>
+                <p className="multiLine_ellipsis ">
+                  Offer Title : {formValue.offer_title}
+                </p>
+                <p className="multiLine_ellipsis ">
+                  Offer : {formValue.offer} %
+                </p>
+                <p className="multiLine_ellipsis ">
+                  Offer : {formValue.net_offer} ₹
+                </p>
+                <p className="multiLine_ellipsis ">
+                  Sell Price : {formValue.sell_price} ₹
+                </p>
+              </div>
+            </Card.Body>
+          }
+        />
+      )}
     </Container>
   );
 }
